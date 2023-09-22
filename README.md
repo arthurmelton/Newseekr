@@ -23,6 +23,8 @@ dune exec newseekr --release
 
 ## Supports
 
+- [CNN](https://cnn.com)
+- [Fox News](https://foxnews.com)
 - [Make Use Of](https://makeuseof.com)
 - [The Register](https://theregister.com)
 - [The Verge](https://theverge.com)
