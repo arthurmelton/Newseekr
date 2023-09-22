@@ -1,7 +1,6 @@
 open Soup
 
 let domain = [ "www.theregister.com"; "theregister.com" ]
-let get_tags input = []
 let get_title input = input $ "h1" |> R.leaf_text
 let get_publish input = input $ ".dateline" |> to_string
 let get_author input = input $ ".byline" |> R.leaf_text
@@ -41,7 +40,7 @@ let parse req =
   let%lwt parsed = Parse.parse req domain in
   let website : Parse.website =
     { domain
-    ; tags = get_tags parsed
+    ; tags = []
     ; title = get_title parsed
     ; publish = get_publish parsed
     ; author = get_author parsed
