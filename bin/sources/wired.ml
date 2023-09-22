@@ -19,11 +19,11 @@ let get_content input =
         (fun z -> delete_attribute z y)
         [ "data-uri"; "data-offer-url"; "class"; "data-event-click"; "rel"; "data-uri" ];
       let href = R.attribute "href" y in
-      if String.starts_with ~prefix:"https://www.theregister.com" href
+      if String.starts_with ~prefix:"https://www.wired.com" href
       then
         set_attribute
           "href"
-          ("/theregister" ^ String.sub href 27 (String.length href - 27))
+          ("/wired" ^ String.sub href 21 (String.length href - 21))
           y);
     if name x = "p"
     then (

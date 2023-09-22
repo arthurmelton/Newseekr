@@ -2,7 +2,7 @@ open Soup
 
 let domain = [ "www.makeuseof.com"; "makeuseof.com" ]
 let get_tags input = []
-let get_title input = input $ "h1" |> R.leaf_text
+let get_title input = input $ "h1.heading_title" |> R.leaf_text
 let get_publish input = input $ "time" |> R.attribute "datetime"
 let get_author input = input $ ".author" |> R.leaf_text
 
