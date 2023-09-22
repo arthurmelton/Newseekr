@@ -1,0 +1,5 @@
+(library
+ (name sources)
+ (libraries lambdasoup dream unix cohttp-lwt-unix lwt_ssl)
+ (preprocess
+  (pps lwt_ppx)))

@@ -1,0 +1,143 @@
+*,::after,::before {
+    box-sizing: border-box;
+}
+
+::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+}
+
+:-moz-focusring {
+    outline: 1px dotted ButtonText;
+}
+
+:-moz-ui-invalid {
+    box-shadow: none;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --white: #6a737d;
+    --code: #fff8d3;
+    --code-border: #f0d547;
+    --pre: #f6f8fa;
+    --bg-color: #fff;
+    --text-color: #24292f;
+    --link-color: #005cc5;
+    --visited: #6f42c1;
+    --blockquote: #005cc5;
+    --blockquote-bg: #fff;
+    --hover: #d73a49;
+    --grey: #ccc;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --white: #f2f2f2;
+    --code: #414558;
+    --code-border: #252525;
+    --pre: #252525;
+    --bg-color: #282a36;
+    --text-color: #f2f2f2;
+    --link-color: #8be9fd;
+    --visited: #bd93f9;
+    --blockquote: #bd93f9;
+    --blockquote-bg: #414558;
+    --hover: #ff80bf;
+    --grey: #414558;
+  }
+}
+
+html {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.5;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    tab-size: 4;
+    font-size: 17px;
+}
+
+body {
+    margin: 0 auto;
+    max-width: 42rem;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+strong {
+    font-weight: 700;
+}
+
+a {
+    text-decoration: underline;
+    color: var(--link-color);
+}
+
+a:hover,a:visited:hover {
+    color: var(--hover);
+}
+
+a:visited {
+    color: var(--visited);
+}
+
+section {
+    margin-bottom: 1.4rem;
+}
+
+section:last-child {
+    margin-bottom: 0;
+}
+
+p {
+    margin: 1rem 0;
+}
+
+@media only screen and (max-width:600px) {
+    body {
+        padding: 1rem;
+    }
+}
+
+figcaption {
+    display: inline;
+}
+
+cite {
+    font-style: normal;
+    margin-left: 8px;
+    color: var(--blockquote);
+    margin-bottom: 25px;
+}
+
+figcaption, cite, #tags {
+    font-size: 14px;
+}
+
+#tags {
+    color: var(--blockquote);
+    margin-bottom: 0px;
+}
+
+h1 {
+    margin-top: 0px;
+}
+
+#author {
+    color: var(--blockquote);
+}
+
+#submit-form {
+    display: flex;
+}
+
+#submit-form > input[type="text"] {
+   flex-basis: 100%;
+   margin-right: 8px;
+}
