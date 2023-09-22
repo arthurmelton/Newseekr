@@ -25,3 +25,4 @@ dune exec newseekr --release
 
 - [The Register](https://theregister.com)
 - [The Verge](https://theverge.com)
+- [Wired](https://wired.com)
