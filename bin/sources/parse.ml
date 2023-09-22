@@ -26,7 +26,7 @@ let[@ocamlformat "disable"] convert website =
 ^     "<link rel=\"stylesheet\" href=\"/static/main.css\">"
 ^   "</head>"
 ^     "<body>"
-^        "<p id=\"tags\">" ^ String.concat " " website.tags ^ "</p>"
+^        "<p id=\"tags\">" ^ String.concat " / " website.tags ^ "</p>"
 ^        "<h1>" ^ website.title ^ "</h1>"
 ^        "<p id=\"author\">By " ^ website.author ^ "</p>"
 ^        "<hr>"
