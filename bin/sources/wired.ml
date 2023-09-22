@@ -25,7 +25,11 @@ let get_content input =
           "href"
           ("/theregister" ^ String.sub href 27 (String.length href - 27))
           y);
-    if name x = "p" then to_string x else "")
+    if name x = "p"
+    then (
+      delete_attribute "class" x;
+      to_string x)
+    else "")
   |> String.concat ""
 ;;
 
