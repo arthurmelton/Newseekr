@@ -131,6 +131,7 @@ h1 {
 
 #author {
     color: var(--blockquote);
+    margin-top: -12px;
 }
 
 #submit-form {
@@ -140,4 +141,14 @@ h1 {
 #submit-form > input[type="text"] {
    flex-basis: 100%;
    margin-right: 8px;
+}
+
+hr {
+  color: inherit;
+  border: 0;
+  margin: 0;
+  height: 1px;
+  background: var(--grey);
+  margin: 4px auto;
+  text-align: center;
 }

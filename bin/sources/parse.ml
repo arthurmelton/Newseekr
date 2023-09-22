@@ -29,6 +29,7 @@ let[@ocamlformat "disable"] convert website =
 ^        "<p id=\"tags\">" ^ String.concat " " website.tags ^ "</p>"
 ^        "<h1>" ^ website.title ^ "</h1>"
 ^        "<p id=\"author\">By " ^ website.author ^ "</p>"
+^        "<hr>"
 ^        website.content
 ^     "</body>"
 ^  "</html>"
