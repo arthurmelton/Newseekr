@@ -1,5 +1,6 @@
 # Newseekr
-An alternative frontend for your favorite news outlets
+An alternative frontend for your favorite news outlets! Do note though that
+using this will not show ads and in effect make the new outlet loose money.
 
 ## Requirements
 
@@ -22,4 +23,5 @@ dune exec newseekr --release
 
 ## Supports
 
+- [The Register](https://theregister.com)
 - [The Verge](https://theverge.com)

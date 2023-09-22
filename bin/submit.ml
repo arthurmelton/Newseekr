@@ -10,7 +10,13 @@ let get_path url =
 let find req =
   let url = get @@ Dream.query req "url" in
   let domain = get_domain url in
-  let name = if List.mem domain Theverge.domain then some "theverge" else none in
+  let name =
+    if List.mem domain Theverge.domain
+    then some "theverge"
+    else if List.mem domain Theregister.domain
+    then some "theregister"
+    else none
+  in
   if is_some name
   then Dream.redirect req @@ "/" ^ get name ^ "/" ^ get_path url
   else Dream.html @@ Core.In_channel.read_all "static/url_not_supported.html"

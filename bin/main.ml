@@ -13,5 +13,7 @@ let () =
        ; Dream.get "/" (fun _ -> Dream.html @@ In_channel.read_all "static/index.html")
          (* -- Service parser - *)
        ; Dream.get "/theverge/**" (fun req -> Lwt.bind (Theverge.parse req) Dream.html)
+       ; Dream.get "/theregister/**" (fun req ->
+           Lwt.bind (Theregister.parse req) Dream.html)
        ]
 ;;
