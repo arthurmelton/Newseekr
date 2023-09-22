@@ -15,16 +15,10 @@ done)
 text=$(echo "$text" | sed "s/(\* Service parser replaced here (\/preprocceser.sh) \*)/$code/g")
 
 # Submit
-first=true
-
 code=$(for i in $(bash -c "ls $SCRIPT_DIR/bin/sources/*.ml"); do
     name=$(basename "$i" | sed 's/...$//')
     if [ "$name" != "parse" ]; then
-        if [ "$first" != true ]; then
-            printf "else "
-        fi
-        first=false
-        printf "if List.mem domain Sources.${name^}.domain then some \"$name\" "
+        printf "else if List.mem domain Sources.${name^}.domain then some \"$name\" "
     fi
 done)
 

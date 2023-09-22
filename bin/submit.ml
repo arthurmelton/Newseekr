@@ -9,10 +9,7 @@ let get_path url =
 let find req =
   let url = get @@ Dream.query req "url" in
   let domain = get_domain url in
-  let name =
-      (* Submit replaced here (/preprocceser.sh) *)
-    else none
-  in
+  let name = if false then none (* Submit replaced here (/preprocceser.sh) *) else none in
   if is_some name
   then Dream.redirect req @@ "/" ^ get name ^ "/" ^ get_path url
   else Dream.html @@ Core.In_channel.read_all "static/url_not_supported.html"
