@@ -29,6 +29,9 @@
     --blockquote-bg: #fff;
     --hover: #d73a49;
     --grey: #ccc;
+
+    --input-background-color: #ffffff;
+    --input-border-color: #EFEFEF;
   }
 }
 
@@ -46,6 +49,9 @@
     --blockquote-bg: #414558;
     --hover: #ff80bf;
     --grey: #414558;
+
+    --input-background-color: #3b3b3b;
+    --input-border-color: #858585;
   }
 }
 
@@ -141,6 +147,17 @@ h1 {
 #submit-form > input[type="text"] {
    flex-basis: 100%;
    margin-right: 8px;
+   background-color: var(--input-background-color);
+   border-color: var(--input-border-color);
+   border-style: ridge;
+   border-radius: 3px;
+   color: var(--text-color);
+}
+
+#submit-form > input + input {
+   background-color: var(--input-border-color);
+   border-style: hidden;
+   border-radius: 3px;
 }
 
 hr {
