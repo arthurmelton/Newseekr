@@ -11,7 +11,9 @@ let find req =
   let url = get @@ Dream.query req "url" in
   let domain = get_domain url in
   let name =
-    if List.mem domain Theregister.domain
+    if List.mem domain Makeuseof.domain
+    then some "makeuseof"
+    else if List.mem domain Theregister.domain
     then some "theregister"
     else if List.mem domain Theverge.domain
     then some "theverge"
