@@ -3,4 +3,5 @@
  (name main)
  (libraries sources lambdasoup dream core)
  (preprocess
-  (pps lwt_ppx)))
+  (action
+   (system "../../../../preproccesser.sh %{input-file}"))))

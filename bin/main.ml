@@ -1,4 +1,3 @@
-open Sources
 open Core
 
 let () =
@@ -11,11 +10,6 @@ let () =
        ; Dream.get "/static/**" @@ Dream.static "static"
        ; Dream.get "/submit" @@ Submit.find
        ; Dream.get "/" (fun _ -> Dream.html @@ In_channel.read_all "static/index.html")
-         (* -- Service parser - *)
-       ; Dream.get "/makeuseof/**" (fun req -> Lwt.bind (Makeuseof.parse req) Dream.html)
-       ; Dream.get "/theregister/**" (fun req ->
-           Lwt.bind (Theregister.parse req) Dream.html)
-       ; Dream.get "/theverge/**" (fun req -> Lwt.bind (Theverge.parse req) Dream.html)
-       ; Dream.get "/wired/**" (fun req -> Lwt.bind (Wired.parse req) Dream.html)
+         (* Service parser replaced here (/preprocceser.sh) *)
        ]
 ;;
