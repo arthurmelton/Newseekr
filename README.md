@@ -23,6 +23,7 @@ dune exec newseekr --release
 
 ## Supports
 
+- [Make Use Of](https://makeuseof.com)
 - [The Register](https://theregister.com)
 - [The Verge](https://theverge.com)
 - [Wired](https://wired.com)
