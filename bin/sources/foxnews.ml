@@ -1,10 +1,24 @@
 open Soup
 
 let domain = [ "www.foxnews.com"; "foxnews.com" ]
-let get_tags input = input $$ ".article-meta > .eyebrow > a" |> to_list |> List.map R.leaf_text
+
+let get_tags input =
+  input $$ ".article-meta > .eyebrow > a" |> to_list |> List.map R.leaf_text
+;;
+
 let get_title input = input $ "h1.headline" |> R.leaf_text
 let get_publish input = input $ ".article-date > time" |> R.leaf_text
-let get_author input = (input $$ ".author-byline > *" |> to_list |> List.filter (fun y -> not @@ List.mem "author-headshot" @@ classes y) |> List.hd) $ "span" |> texts |> List.hd
+
+let get_author input =
+  input
+  $$ ".author-byline > *"
+  |> to_list
+  |> List.filter (fun y -> not @@ List.mem "author-headshot" @@ classes y)
+  |> List.hd
+  $ "span"
+  |> texts
+  |> List.hd
+;;
 
 let get_content input =
   input
@@ -29,12 +43,12 @@ let get_content input =
       if Option.is_some a && texts x |> List.hd = (Option.get a |> R.leaf_text)
       then ""
       else to_string x)
-    else if name x = "div" && List.mem "image-ct" @@ classes x then (
-        let img = x $ "img" in
-        List.iter (fun y -> delete_attribute y img) ["width"; "height"];
-        let info = x $ ".info > .caption > p" in
-        (to_string img) ^ (to_string info)
-    )
+    else if name x = "div" && (List.mem "image-ct" @@ classes x)
+    then (
+      let img = x $ "img" in
+      List.iter (fun y -> delete_attribute y img) [ "width"; "height" ];
+      let info = x $ ".info > .caption > p" in
+      to_string img ^ to_string info)
     else "")
   |> String.concat ""
 ;;
