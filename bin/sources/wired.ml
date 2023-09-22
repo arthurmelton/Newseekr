@@ -21,10 +21,7 @@ let get_content input =
       let href = R.attribute "href" y in
       if String.starts_with ~prefix:"https://www.wired.com" href
       then
-        set_attribute
-          "href"
-          ("/wired" ^ String.sub href 21 (String.length href - 21))
-          y);
+        set_attribute "href" ("/wired" ^ String.sub href 21 (String.length href - 21)) y);
     if name x = "p"
     then (
       delete_attribute "class" x;
