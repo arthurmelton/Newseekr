@@ -12,31 +12,35 @@ type website =
   }
 
 let new_url domain path =
-  "https://"
-  ^ domain
-  ^ "/"
-  ^ (path
-     |> String.split_on_char '/'
-     |> List.tl
-     |> List.tl
-     |> String.concat "/")
+  [ "https://"
+  ; domain
+  ; "/"
+  ; path
+    |> String.split_on_char '/'
+    |> List.tl
+    |> List.tl
+    |> String.concat "/"
+  ]
+  |> String.concat ""
 ;;
 
 let[@ocamlformat "disable"] convert website =
-  "<!DOCTYPE html>"
-^ "<html>"
-^   "<head>"
-^     "<title>" ^ website.name ^ " - " ^ website.title ^ "</title>"
-^     "<link rel=\"stylesheet\" href=\"/static/main.css\">"
-^   "</head>"
-^     "<body>"
-^        "<p id=\"tags\">" ^ String.concat " / " website.tags ^ "</p>"
-^        "<h1>" ^ website.title ^ "</h1>"
-^        "<p id=\"author\">By " ^ website.author ^ "</p>"
-^        "<hr>"
-^        website.content
-^     "</body>"
-^  "</html>"
+  [ "<!DOCTYPE html>"
+  ; "<html>"
+  ;   "<head>"
+  ;     "<title>"; website.name; " - "; website.title; "</title>"
+  ;     "<link rel=\"stylesheet\" href=\"/static/main.css\">"
+  ;   "</head>"
+  ;   "<body>"
+  ;     "<p id=\"tags\">"; String.concat " / " website.tags; "</p>"
+  ;     "<h1>"; website.title; "</h1>"
+  ;     "<p id=\"author\">By "; website.author; "</p>"
+  ;     "<hr>"
+  ;     website.content
+  ;   "</body>"
+  ; "</html>"
+  ]
+  |> String.concat ""
 
 let parse req domains =
   let url = new_url (List.nth domains 0) (Dream.target req) in

@@ -19,6 +19,9 @@ let find req =
     else none
   in
   if is_some name
-  then Dream.redirect req @@ "/" ^ get name ^ "/" ^ get_path url
+  then
+    Dream.redirect req
+    @@ String.concat ""
+    @@ [ "/"; get name; "/"; get_path url ]
   else Dream.html @@ Core.In_channel.read_all "static/url_not_supported.html"
 ;;
