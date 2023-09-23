@@ -10,7 +10,9 @@ let get_title input = input $ "h1" |> R.leaf_text
 let get_publish input = input $ "time" |> R.attribute "datetime"
 
 let get_author input =
-  input $ ".duet--article--article-byline > span + span > span + span > a" |> R.leaf_text
+  input
+  $ ".duet--article--article-byline > span + span > span + span > a"
+  |> R.leaf_text
 ;;
 
 let get_content input =
@@ -51,7 +53,8 @@ let get_content input =
           set_attribute "src" img_src img;
           let caption = x $$ ".duet--media--caption > *" |> to_list in
           caption |> List.iter (delete_attribute "class");
-          (img |> to_string) ^ (caption |> List.map to_string |> String.concat ""))
+          (img |> to_string)
+          ^ (caption |> List.map to_string |> String.concat ""))
         else (
           let ul = x $? "ul" in
           if Option.is_some ul

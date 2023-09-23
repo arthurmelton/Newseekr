@@ -31,16 +31,26 @@ let get_content input =
     |> List.iter (fun y ->
       List.iter
         (fun z -> delete_attribute z y)
-        [ "data-uri"; "data-offer-url"; "class"; "data-event-click"; "rel"; "data-uri" ];
+        [ "data-uri"
+        ; "data-offer-url"
+        ; "class"
+        ; "data-event-click"
+        ; "rel"
+        ; "data-uri"
+        ];
       let href = R.attribute "href" y in
       if String.starts_with ~prefix:"https://www.foxnews.com" href
       then
-        set_attribute "href" ("/foxnews" ^ String.sub href 23 (String.length href - 23)) y);
+        set_attribute
+          "href"
+          ("/foxnews" ^ String.sub href 23 (String.length href - 23))
+          y);
     if name x = "p"
     then (
       delete_attribute "class" x;
       let a = x $? "a" in
-      if Option.is_some a && texts x |> List.hd = (Option.get a |> R.leaf_text)
+      if Option.is_some a
+         && texts x |> List.hd = (Option.get a |> R.leaf_text)
       then ""
       else to_string x)
     else if name x = "div" && (List.mem "image-ct" @@ classes x)

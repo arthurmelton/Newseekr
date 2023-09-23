@@ -33,7 +33,10 @@ let get_content input =
         List.iter
           (fun y -> delete_attribute y img)
           [ "width"; "height"; "class"; "style" ];
-        set_attribute "src" ("/proxy/" ^ Option.get @@ attribute "data-img-url" img) img;
+        set_attribute
+          "src"
+          ("/proxy/" ^ Option.get @@ attribute "data-img-url" img)
+          img;
         delete_attribute "data-img-url" img;
         to_string img)
       else ""))

@@ -15,7 +15,11 @@ let new_url domain path =
   "https://"
   ^ domain
   ^ "/"
-  ^ (path |> String.split_on_char '/' |> List.tl |> List.tl |> String.concat "/")
+  ^ (path
+     |> String.split_on_char '/'
+     |> List.tl
+     |> List.tl
+     |> String.concat "/")
 ;;
 
 let[@ocamlformat "disable"] convert website =

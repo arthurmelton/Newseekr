@@ -15,8 +15,9 @@ let return req =
   Dream.respond
     ~headers:
       [ ( "Content-Type"
-        , resp |> Response.headers |> fun y -> Header.get y "Content-Type" |> Option.get
-        )
+        , resp
+          |> Response.headers
+          |> fun y -> Header.get y "Content-Type" |> Option.get )
       ]
     body
 ;;

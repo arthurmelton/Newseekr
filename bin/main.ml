@@ -9,7 +9,8 @@ let () =
        [ Dream.get "/proxy/**" @@ Proxy.return
        ; Dream.get "/static/**" @@ Dream.static "static"
        ; Dream.get "/submit" @@ Submit.find
-       ; Dream.get "/" (fun _ -> Dream.html @@ In_channel.read_all "static/index.html")
+       ; Dream.get "/" (fun _ ->
+           Dream.html @@ In_channel.read_all "static/index.html")
          (* Service parser replaced here (/preprocceser.sh) *)
        ]
 ;;
