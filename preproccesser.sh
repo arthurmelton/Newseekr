@@ -2,13 +2,13 @@
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-text=$(cat $1)
+text=$(cat "$1")
 
 # Router
 code=$(for i in $(bash -c "ls $SCRIPT_DIR/bin/sources/*.ml"); do
     name=$(basename "$i" | sed 's/...$//')
     if [ "$name" != "parse" ]; then
-        printf "; Dream.get \"\\\\/$name\\\\/**\" (fun req -> Lwt.bind (Sources.${name^}.parse req) Dream.html)"
+        printf "; Dream.get \"\\\\/%s\\\\/**\" (fun req -> Lwt.bind (Sources.%s.parse req) Dream.html)" "$name" "${name^}"
     fi
 done)
 
@@ -18,7 +18,7 @@ text=$(echo "$text" | sed "s/(\* Service parser replaced here (\/preprocceser.sh
 code=$(for i in $(bash -c "ls $SCRIPT_DIR/bin/sources/*.ml"); do
     name=$(basename "$i" | sed 's/...$//')
     if [ "$name" != "parse" ]; then
-        printf "else if List.mem domain Sources.${name^}.domain then some \"$name\" "
+        printf "else if List.mem domain Sources.%s.domain then some \"%s\" " "${name^}" "$name"
     fi
 done)
 
