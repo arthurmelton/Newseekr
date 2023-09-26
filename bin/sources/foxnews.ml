@@ -56,7 +56,7 @@ let parse req =
     ; publish = get_publish parsed
     ; author = get_author parsed
     ; content = get_content parsed
-    ; name = "Wired"
+    ; name = "Fox News"
     }
   in
   Lwt.return @@ Parse.convert website
