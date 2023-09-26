@@ -2,11 +2,7 @@ open Soup
 
 let domain = [ "www.nytimes.com"; "nytimes.com" ]
 let get_title input = input $ "h1" |> R.leaf_text
-
-let get_publish input =
-  input $ "time" |> R.attribute "datetime"
-;;
-
+let get_publish input = input $ "time" |> R.attribute "datetime"
 let get_author input = input $ ".last-byline" |> R.leaf_text
 
 let get_content input =
@@ -22,8 +18,7 @@ let get_content input =
       if Option.is_some img
       then (
         let img = Option.get img in
-        (to_string @@ Parse.update_img img)
-        ^ (to_string ( x $ "figcaption")))
+        (to_string @@ Parse.update_img img) ^ to_string (x $ "figcaption"))
       else ""))
   |> String.concat ""
 ;;
