@@ -96,11 +96,10 @@ let convert_a node name =
     set_attribute "href" new_href y)
 ;;
 
-let update_img img =
+let update_img ?src img =
+  let src = match src with None -> R.attribute "src" img | Some x -> x in
   let new_img =
-    create_element
-      ~attributes:[ "src", "/proxy/" ^ R.attribute "src" img ]
-      "img"
+    create_element ~attributes:[ "src", "/proxy/" ^ src ] "img"
   in
   let alt = attribute "alt" img in
   if Option.is_some alt then set_attribute "alt" (Option.get alt) new_img;

@@ -20,15 +20,8 @@ let get_content input =
       if Option.is_some img
       then (
         let img = Option.get img in
-        List.iter
-          (fun y -> delete_attribute y img)
-          [ "width"; "height"; "class"; "style" ];
-        set_attribute
-          "src"
-          ("/proxy/" ^ Option.get @@ attribute "data-img-url" img)
-          img;
-        delete_attribute "data-img-url" img;
-        to_string img)
+        to_string
+        @@ Parse.update_img ~src:(R.attribute "data-img-url" img) img)
       else ""))
   |> String.concat ""
 ;;
