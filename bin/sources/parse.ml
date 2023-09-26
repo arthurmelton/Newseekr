@@ -95,7 +95,8 @@ let convert_a node name =
         else domain)
       else href
     in
-    set_attribute "href" new_href y)
+    set_attribute "href" new_href y;
+    delete_attribute "target" y)
 ;;
 
 let update_img ?src img =
