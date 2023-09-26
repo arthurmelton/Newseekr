@@ -10,17 +10,7 @@ let get_content input =
   $$ ".article__content > *"
   |> to_list
   |> List.map (fun x ->
-    x
-    $$ "a"
-    |> to_list
-    |> List.iter (fun y ->
-      let href = R.attribute "href" y in
-      if String.starts_with ~prefix:"https://www.cnn.com" href
-      then
-        set_attribute
-          "href"
-          ("/cnn" ^ String.sub href 22 (String.length href - 22))
-          y);
+    Parse.convert_a x "cnn";
     List.iter
       (fun y -> delete_attribute y x)
       [ "class"
@@ -35,22 +25,7 @@ let get_content input =
       let img = x $? ".image__picture > img" in
       if Option.is_some img
       then (
-        let img = Option.get img in
-        List.iter
-          (fun y -> delete_attribute y img)
-          [ "width"
-          ; "height"
-          ; "class"
-          ; "onload"
-          ; "onerror"
-          ; "height"
-          ; "width"
-          ; "loading"
-          ];
-        set_attribute
-          "src"
-          ("/proxy/" ^ Option.get @@ attribute "src" img)
-          img;
+        let img = Parse.update_img @@ Option.get img in
         let metadata = x $ ".image__metadata" in
         delete_attribute "class" metadata;
         to_string img ^ to_string metadata)

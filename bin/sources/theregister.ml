@@ -12,17 +12,7 @@ let get_content input =
   |> List.map (fun x ->
     if Option.is_none (x $? "noscript")
     then (
-      x
-      $$ "a"
-      |> to_list
-      |> List.iter (fun y ->
-        let href = R.attribute "href" y in
-        if String.starts_with ~prefix:"https://www.theregister.com" href
-        then
-          set_attribute
-            "href"
-            ("/theregister" ^ String.sub href 27 (String.length href - 27))
-            y);
+      Parse.convert_a x "theregister";
       if name x = "p"
       then to_string x
       else if name x = "ul"

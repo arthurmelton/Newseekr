@@ -24,5 +24,16 @@ done)
 
 text=$(echo "$text" | sed "s/(\* Submit replaced here (\/preprocceser.sh) \*)/$code/g")
 
+# Parse
+code=$(for i in $(bash -c "ls $SCRIPT_DIR/bin/sources/*.ml"); do
+    name=$(basename "$i" | sed 's/...$//')
+    if [ "$name" != "parse" ]; then
+        domains=$(cat "$i" | grep -Po "let *domain *= *\[[^\]]*\]" | grep -Po "\[.*")
+        printf "else if List.mem domain %s then Option.some \"%s\" " "$domains" "$name"
+    fi
+done)
+
+text=$(echo "$text" | sed "s/(\* Names replaced here (\/preprocceser.sh) \*)/$code/g")
+
 # Finish
 echo "$text"

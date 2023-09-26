@@ -10,17 +10,7 @@ let get_content input =
   $$ ".content-block-regular > *"
   |> to_list
   |> List.map (fun x ->
-    x
-    $$ "a"
-    |> to_list
-    |> List.iter (fun y ->
-      let href = R.attribute "href" y in
-      if String.starts_with ~prefix:"https://www.makeuseof.com" href
-      then
-        set_attribute
-          "href"
-          ("/makeuseof" ^ String.sub href 26 (String.length href - 26))
-          y);
+    Parse.convert_a x "makeuseof";
     if name x = "p"
     then to_string x
     else if name x = "h2"

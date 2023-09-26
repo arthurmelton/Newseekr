@@ -23,13 +23,7 @@ let get_content input =
   |> List.map (fun x ->
     if Option.is_none (x $? ".duet--article--sidebar")
     then (
-      x
-      $$ "a"
-      |> to_list
-      |> List.iter (fun y ->
-        let href = R.attribute "href" y in
-        if String.starts_with ~prefix:"/" href
-        then set_attribute "href" ("/theverge" ^ href) y);
+      Parse.convert_a x "theverge";
       let p = x $? "> p" in
       if Option.is_some p
       then (
@@ -40,17 +34,7 @@ let get_content input =
         let img = x $? "img[srcset]" in
         if Option.is_some img
         then (
-          let img = Option.get img in
-          let img_src =
-            "/proxy/"
-            ^ (R.attribute "srcset" img
-               |> String.split_on_char ' '
-               |> List.rev
-               |> fun y -> List.nth y 1)
-          in
-          [ "decoding"; "data-nimg"; "style"; "srcset"; "loading"; "sizes" ]
-          |> List.iter (fun y -> delete_attribute y img);
-          set_attribute "src" img_src img;
+          let img = Parse.update_img @@ Option.get img in
           let caption = x $$ ".duet--media--caption > *" |> to_list in
           caption |> List.iter (delete_attribute "class");
           (img |> to_string)

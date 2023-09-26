@@ -25,26 +25,7 @@ let get_content input =
   $$ ".article-body > *"
   |> to_list
   |> List.map (fun x ->
-    x
-    $$ "a"
-    |> to_list
-    |> List.iter (fun y ->
-      List.iter
-        (fun z -> delete_attribute z y)
-        [ "data-uri"
-        ; "data-offer-url"
-        ; "class"
-        ; "data-event-click"
-        ; "rel"
-        ; "data-uri"
-        ];
-      let href = R.attribute "href" y in
-      if String.starts_with ~prefix:"https://www.foxnews.com" href
-      then
-        set_attribute
-          "href"
-          ("/foxnews" ^ String.sub href 23 (String.length href - 23))
-          y);
+    Parse.convert_a x "foxnews";
     if name x = "p"
     then (
       delete_attribute "class" x;
@@ -55,8 +36,7 @@ let get_content input =
       else to_string x)
     else if name x = "div" && (List.mem "image-ct" @@ classes x)
     then (
-      let img = x $ "img" in
-      List.iter (fun y -> delete_attribute y img) [ "width"; "height" ];
+      let img = Parse.update_img @@ x $ "img" in
       let info = x $ ".info > .caption > p" in
       to_string img ^ to_string info)
     else "")

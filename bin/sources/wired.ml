@@ -11,26 +11,7 @@ let get_content input =
   $$ ".body__inner-container > *"
   |> to_list
   |> List.map (fun x ->
-    x
-    $$ "a"
-    |> to_list
-    |> List.iter (fun y ->
-      List.iter
-        (fun z -> delete_attribute z y)
-        [ "data-uri"
-        ; "data-offer-url"
-        ; "class"
-        ; "data-event-click"
-        ; "rel"
-        ; "data-uri"
-        ];
-      let href = R.attribute "href" y in
-      if String.starts_with ~prefix:"https://www.wired.com" href
-      then
-        set_attribute
-          "href"
-          ("/wired" ^ String.sub href 21 (String.length href - 21))
-          y);
+    Parse.convert_a x "wired";
     if name x = "p"
     then (
       delete_attribute "class" x;
