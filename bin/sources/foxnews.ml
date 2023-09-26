@@ -36,9 +36,13 @@ let get_content input =
       else to_string x)
     else if name x = "div" && (List.mem "image-ct" @@ classes x)
     then (
-      let img = Parse.update_img @@ x $ "img" in
-      let info = x $ ".info > .caption > p" in
-      to_string img ^ to_string info)
+      let img = x $? "img" in
+      if Option.is_some img
+      then (
+        let img = Parse.update_img @@ Option.get img in
+        let info = x $ ".info > .caption > p" in
+        to_string img ^ to_string info)
+      else "")
     else "")
   |> String.concat ""
 ;;

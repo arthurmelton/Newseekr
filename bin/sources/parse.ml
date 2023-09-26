@@ -99,7 +99,13 @@ let convert_a node name =
 ;;
 
 let update_img ?src img =
-  let src = match src with None -> R.attribute "src" img | Some x -> x in
+  let src =
+    match src with
+    | None ->
+      let src = attribute "src" img in
+      (match src with None -> "" | Some x -> x)
+    | Some x -> x
+  in
   let new_img =
     create_element ~attributes:[ "src", "/proxy/" ^ src ] "img"
   in
