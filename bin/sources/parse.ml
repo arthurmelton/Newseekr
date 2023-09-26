@@ -78,10 +78,12 @@ let convert_a node name =
         let domain = String.split_on_char '/' path |> List.hd in
         let domain_length = String.length domain in
         let path =
-          String.sub
-            path
-            (domain_length + 1)
-            (String.length path - domain_length - 1)
+          String.sub path domain_length (String.length path - domain_length)
+        in
+        let path =
+          if String.length path > 1
+          then String.sub path 1 (String.length path - 1)
+          else path
         in
         let name =
           if false
