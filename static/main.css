@@ -111,10 +111,6 @@ p {
     }
 }
 
-figcaption {
-    display: inline;
-}
-
 cite {
     font-style: normal;
     margin-left: 8px;
