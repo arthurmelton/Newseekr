@@ -10,7 +10,7 @@ let get_content input =
   $$ "section[name=\"articleBody\"] > div > div > *"
   |> to_list
   |> List.map (fun x ->
-    Parse.convert_a x "msn";
+    Parse.convert_a x "nytimes";
     if name x = "p"
     then to_string x
     else (
