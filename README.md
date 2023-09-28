@@ -14,11 +14,26 @@ All of the settings are changed through environment variables
 
 ## Running
 
+For running on a server and production you should use `flambda` for compiling. To tell opam to do so, you can do the following:
+
+```sh
+opam switch create 4.14.0+flambda ocaml-variants.4.14.0+options ocaml-option-flambda
+eval (opam env --switch=4.14.0+flambda)
+```
+
+To compile the program you will run the following:
+
 ```sh
 git clone https://github.com/arthurmelton/newseekr
 cd newseekr
 opam install . --deps-only
-dune exec newseekr --release
+dune build --release newseekr
+```
+
+Your executable will be at
+
+```sh
+_build/default/bin/main.exe
 ```
 
 ## Supports
