@@ -20,7 +20,7 @@ jobs:
           - "5.0.0"
           - "ocaml-variants.5.0.0+options,ocaml-option-flambda"
           - "5.0.1"
-          - "ocaml-variants.5.0.1+options,ocaml-option-flambda"
+          - "ocaml-variants.5.1.0+options,ocaml-option-flambda"
 
     runs-on: ${{ matrix.os }}
 
