@@ -24,5 +24,5 @@ let find req =
     @@ String.concat ""
     @@ [ "/"; get name; "/"; get_path url ]
   else
-    Dream.html @@ Option.get @@ Assets.read "static/url_not_supported.html"
+    Dream.html @@ Option.get @@ Assets.read "url_not_supported.html"
 ;;

@@ -20,7 +20,7 @@ let () =
            Dream.html
            @@ Option.value ~default:""
            (* For some reason doing Option.get here fails *)
-           @@ Assets.read "static/index.html")
+           @@ Assets.read "index.html")
          (* Service parser replaced here (/preprocceser.sh) *)
        ]
 ;;
