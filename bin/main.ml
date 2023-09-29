@@ -1,5 +1,11 @@
 open Core
 
+let loader _root path _request =
+  match Assets.read path with
+  | None -> Dream.empty `Not_Found
+  | Some asset -> Dream.respond asset
+;;
+
 let () =
   Dream.run
     ~port:(Option.value (Sys.getenv "PORT") ~default:"8080" |> int_of_string)
@@ -8,10 +14,13 @@ let () =
   @@ Dream.logger
   @@ Dream.router
        [ Dream.get "/proxy/**" @@ Proxy.return
-       ; Dream.get "/static/**" @@ Dream.static "static"
+       ; Dream.get "/static/**" @@ Dream.static ~loader ""
        ; Dream.get "/submit" @@ Submit.find
        ; Dream.get "/" (fun _ ->
-           Dream.html @@ In_channel.read_all "static/index.html")
+           Dream.html
+           @@ Option.value ~default:""
+           (* For some reason doing Option.get here fails *)
+           @@ Assets.read "static/index.html")
          (* Service parser replaced here (/preprocceser.sh) *)
        ]
 ;;

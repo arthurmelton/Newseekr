@@ -37,5 +37,11 @@ done)
 
 text=$(echo "$text" | sed "s/(\* Names replaced here (\/preprocceser.sh) \*)/$code/g")
 
+# Crunch
+
+if [ "$text" == "$(cat "$SCRIPT_DIR/bin/assets.ml")" ]; then
+    text="$(ocaml-crunch -m plain "$SCRIPT_DIR/static")"
+fi
+
 # Finish
 echo "$text"
