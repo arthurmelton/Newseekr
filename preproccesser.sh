@@ -8,7 +8,8 @@ text=$(cat "$1")
 code=$(for i in $(bash -c "ls $SCRIPT_DIR/bin/sources/*.ml"); do
     name=$(basename "$i" | sed 's/...$//')
     if [ "$name" != "parse" ]; then
-        printf "; Dream.get \"\\\\/%s\\\\/**\" (fun req -> Lwt.bind (Sources.%s.parse req) Dream.html)" "$name" "${name^}"
+        up_name="$(tr '[:lower:]' '[:upper:]' <<< ${name:0:1})${name:1}"
+        printf "; Dream.get \"\\\\/%s\\\\/**\" (fun req -> Lwt.bind (Sources.%s.parse req) Dream.html)" "$name" "$up_name"
     fi
 done)
 
@@ -18,7 +19,8 @@ text=$(echo "$text" | sed "s/(\* Service parser replaced here (\/preprocceser.sh
 code=$(for i in $(bash -c "ls $SCRIPT_DIR/bin/sources/*.ml"); do
     name=$(basename "$i" | sed 's/...$//')
     if [ "$name" != "parse" ]; then
-        printf "else if List.mem domain Sources.%s.domain then some \"%s\" " "${name^}" "$name"
+        up_name="$(tr '[:lower:]' '[:upper:]' <<< ${name:0:1})${name:1}"
+        printf "else if List.mem domain Sources.%s.domain then some \"%s\" " "$up_name" "$name"
     fi
 done)
 
@@ -28,7 +30,7 @@ text=$(echo "$text" | sed "s/(\* Submit replaced here (\/preprocceser.sh) \*)/$c
 code=$(for i in $(bash -c "ls $SCRIPT_DIR/bin/sources/*.ml"); do
     name=$(basename "$i" | sed 's/...$//')
     if [ "$name" != "parse" ]; then
-        domains=$(cat "$i" | grep -Po "let *domain *= *\[[^\]]*\]" | grep -Po "\[.*")
+        domains=$(cat "$i" | grep -o "let *domain *= *\[[^\]*\]" | grep -o "\[[^\]*\]")
         printf "else if List.mem domain %s then Option.some \"%s\" " "$domains" "$name"
     fi
 done)
