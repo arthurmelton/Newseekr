@@ -1,4 +1,5 @@
 # Newseekr
+[![Build status](https://github.com/arthurmelton/Newseekr/workflows/Build/badge.svg)](https://github.com/arthurmelton/Newseekr/actions)
 An alternative frontend for your favorite news outlets! Do note though that
 using this will not show ads and in effect make the new outlet loose money.
 
