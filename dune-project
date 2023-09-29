@@ -17,4 +17,4 @@
  (name newseekr)
  (synopsis "An alternative frontend for your favorate news outlets")
  (description "An alternative frontend for your favorate news outlets")
- (depends ocaml dune lambdasoup dream core cohttp-lwt-unix lwt_ssl))
+ (depends ocaml dune lambdasoup dream core cohttp-lwt-unix lwt_ssl crunch))

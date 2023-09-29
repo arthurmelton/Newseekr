@@ -15,6 +15,7 @@ depends: [
   "core"
   "cohttp-lwt-unix"
   "lwt_ssl"
+  "crunch"
   "odoc" {with-doc}
 ]
 build: [
