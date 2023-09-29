@@ -114,3 +114,9 @@ let update_img ?src img =
   if Option.is_some alt then set_attribute "alt" (Option.get alt) new_img;
   new_img
 ;;
+
+let to_string_classless item =
+  delete_attribute "class" item;
+  item $$ "*" |> to_list |> List.iter (delete_attribute "class");
+  to_string item
+;;

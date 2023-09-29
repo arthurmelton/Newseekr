@@ -12,13 +12,14 @@ let get_content input =
   |> List.map (fun x ->
     Parse.convert_a x "nytimes";
     if name x = "p"
-    then to_string x
+    then Parse.to_string_classless x
     else (
       let img = x $? "img" in
       if Option.is_some img
       then (
         let img = Option.get img in
-        (to_string @@ Parse.update_img img) ^ to_string (x $ "figcaption"))
+        (to_string @@ Parse.update_img img)
+        ^ Parse.to_string_classless (x $ "figcaption"))
       else ""))
   |> String.concat ""
 ;;

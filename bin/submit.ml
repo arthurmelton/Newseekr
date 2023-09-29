@@ -23,6 +23,5 @@ let find req =
     Dream.redirect req
     @@ String.concat ""
     @@ [ "/"; get name; "/"; get_path url ]
-  else
-    Dream.html @@ Option.get @@ Assets.read "url_not_supported.html"
+  else Dream.html @@ Option.get @@ Assets.read "url_not_supported.html"
 ;;

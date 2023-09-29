@@ -28,20 +28,18 @@ let get_content input =
     Parse.convert_a x "foxnews";
     if name x = "p"
     then (
-      delete_attribute "class" x;
       let a = x $? "a" in
       if Option.is_some a
          && texts x |> List.hd = (Option.get a |> R.leaf_text)
       then ""
-      else to_string x)
+      else Parse.to_string_classless x)
     else if name x = "div" && (List.mem "image-ct" @@ classes x)
     then (
       let img = x $? "img" in
       if Option.is_some img
-      then (
-        let img = Parse.update_img @@ Option.get img in
-        let info = x $ ".info > .caption > p" in
-        to_string img ^ to_string info)
+      then
+        to_string (Parse.update_img @@ Option.get img)
+        ^ Parse.to_string_classless (x $ ".info > .caption > p")
       else "")
     else "")
   |> String.concat ""

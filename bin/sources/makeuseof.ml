@@ -12,15 +12,15 @@ let get_content input =
   |> List.map (fun x ->
     Parse.convert_a x "makeuseof";
     if name x = "p"
-    then to_string x
+    then Parse.to_string_classless x
     else if name x = "h2"
-    then to_string x
+    then Parse.to_string_classless x
     else (
       let img = x $? "img" in
       if Option.is_some img
       then (
         let img = Option.get img in
-        to_string
+        Parse.to_string_classless
         @@ Parse.update_img ~src:(R.attribute "data-img-url" img) img)
       else ""))
   |> String.concat ""

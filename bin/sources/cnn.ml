@@ -20,15 +20,13 @@ let get_content input =
       ; "data-article-gutter"
       ];
     if name x = "p"
-    then to_string x
+    then Parse.to_string_classless x
     else (
       let img = x $? ".image__picture > img" in
       if Option.is_some img
-      then (
-        let img = Parse.update_img @@ Option.get img in
-        let metadata = x $ ".image__metadata" in
-        delete_attribute "class" metadata;
-        to_string img ^ to_string metadata)
+      then
+        to_string (Parse.update_img @@ Option.get img)
+        ^ Parse.to_string_classless (x $ ".image__metadata")
       else ""))
   |> String.concat ""
 ;;

@@ -13,14 +13,8 @@ let get_content input =
     if Option.is_none (x $? "noscript")
     then (
       Parse.convert_a x "theregister";
-      if name x = "p"
-      then to_string x
-      else if name x = "ul"
-      then (
-        delete_attribute "class" x;
-        to_string x)
-      else if name x = "h3"
-      then to_string x
+      if List.mem (name x) [ "p"; "ul"; "h3" ]
+      then Parse.to_string_classless x
       else "")
     else "")
   |> String.concat ""

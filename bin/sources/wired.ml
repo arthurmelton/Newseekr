@@ -12,11 +12,7 @@ let get_content input =
   |> to_list
   |> List.map (fun x ->
     Parse.convert_a x "wired";
-    if name x = "p"
-    then (
-      delete_attribute "class" x;
-      to_string x)
-    else "")
+    if name x = "p" then Parse.to_string_classless x else "")
   |> String.concat ""
 ;;
 

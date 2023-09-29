@@ -26,27 +26,22 @@ let get_content input =
       Parse.convert_a x "theverge";
       let p = x $? "> p" in
       if Option.is_some p
-      then (
-        let p = Option.get p in
-        p |> delete_attribute "class";
-        p |> to_string)
+      then Parse.to_string_classless (Option.get p)
       else (
         let img = x $? "img[srcset]" in
         if Option.is_some img
         then (
           let img = Parse.update_img @@ Option.get img in
-          let caption = x $$ ".duet--media--caption > *" |> to_list in
-          caption |> List.iter (delete_attribute "class");
           (img |> to_string)
-          ^ (caption |> List.map to_string |> String.concat ""))
+          ^ (x
+             $$ ".duet--media--caption > *"
+             |> to_list
+             |> List.map Parse.to_string_classless
+             |> String.concat ""))
         else (
           let ul = x $? "ul" in
           if Option.is_some ul
-          then (
-            let ul = Option.get ul in
-            delete_attribute "class" ul;
-            ul $$ "li" |> to_list |> List.iter (delete_attribute "class");
-            ul |> to_string)
+          then Parse.to_string_classless (Option.get ul)
           else "")))
     else "")
   |> String.concat ""
