@@ -92,7 +92,7 @@ let convert_a node name =
         in
         if Option.is_some name
         then String.concat "" [ "/"; Option.get name; "/"; path ]
-        else domain)
+        else href)
       else href
     in
     set_attribute "href" new_href y;
@@ -119,4 +119,23 @@ let to_string_classless item =
   delete_attribute "class" item;
   item $$ "*" |> to_list |> List.iter (delete_attribute "class");
   to_string item
+;;
+
+let join_strings strings =
+  let length = List.length strings in
+  if length = 0
+  then ""
+  else if length = 1
+  then List.nth strings 0
+  else if length = 2
+  then String.concat " and " strings
+  else (
+    let strings = List.rev strings in
+    let first = List.hd strings in
+    let strings = List.tl strings in
+    let second = List.hd strings in
+    let strings = List.tl strings |> List.rev in
+    String.concat
+      ""
+      [ String.concat ", " strings; ", "; second; ", and "; first ])
 ;;
